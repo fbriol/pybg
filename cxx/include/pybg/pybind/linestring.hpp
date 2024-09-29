@@ -10,7 +10,8 @@ namespace pybg::pybind {
 template <typename T, template <typename> typename Linestring,
           template <typename> typename Point>
 auto bind_linestring(nanobind::module_ &m, const char *const name) -> void {
-  auto cl = pybg::pybind::bind_container<T, Linestring, Point, 2>(m, name);
+  auto cl = pybg::pybind::bind_container<T, Linestring, Point,
+                                         NDims<Point<T>>::value>(m, name);
   cl.def("__repr__", [](const Linestring<T> &self) {
     return "<Linestring with " + std::to_string(self.size()) + " points>";
   });
