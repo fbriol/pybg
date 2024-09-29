@@ -5,6 +5,7 @@
 
 #include "pybg/cs/cartesian.hpp"
 #include "pybg/cs/geographic.hpp"
+#include "pybg/cs/spherical.hpp"
 
 template <template <typename> typename Geometry>
 auto instantiate_wkt(nanobind::module_& m) {
@@ -29,6 +30,7 @@ NB_MODULE(_wkt, m) {
   WKT(pybg::cs::cartesian::xy);
   WKT(pybg::cs::cartesian::xyz);
   WKT(pybg::cs::geographic);
+  WKT(pybg::cs::spherical);
 
   instantiate_wkt<pybg::cs::cartesian::xy::Box>(m);
   instantiate_wkt<pybg::cs::geographic::Box>(m);

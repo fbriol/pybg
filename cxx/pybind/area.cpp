@@ -4,6 +4,7 @@
 
 #include "pybg/cs/cartesian.hpp"
 #include "pybg/cs/geographic.hpp"
+#include "pybg/cs/spherical.hpp"
 
 template <template <typename> typename Geometry>
 auto instantiate_area(nanobind::module_& m) {
@@ -59,6 +60,7 @@ NB_MODULE(_area, m) {
 
   AREA(cartesian::xy);
   AREA(geographic);
+  AREA(spherical);
   AREA_WITH_STRATEGY(geographic);
 
   instantiate_area<cartesian::xyz::Linestring>(m);
