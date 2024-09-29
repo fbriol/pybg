@@ -14,6 +14,13 @@
 
 NB_MODULE(_geographic, m) {
   using namespace pybg::geographic;
+
+  nanobind::enum_<Strategy>(m, "Strategy")
+      .value("Andoyer", Strategy::Andoyer)
+      .value("Thomas", Strategy::Thomas)
+      .value("Vincenty", Strategy::Vincenty)
+      .value("Karney", Strategy::Karney);
+
   pybg::pybind::instantiate_box<Box, Point>(m);
   pybg::pybind::instantiate_linestring<Linestring, Point>(m);
   pybg::pybind::instantiate_multilinestring<MultiLinestring, Linestring>(m);

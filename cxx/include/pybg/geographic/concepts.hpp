@@ -6,6 +6,23 @@
 
 namespace pybg::geographic {
 
+enum class Strategy : int8_t { Andoyer, Thomas, Vincenty, Karney };
+
+constexpr auto strategy_name(const Strategy& strategy) -> const char* const {
+  switch (strategy) {
+    case Strategy::Andoyer:
+      return "andoyer";
+    case Strategy::Thomas:
+      return "thomas";
+    case Strategy::Vincenty:
+      return "vincenty";
+    case Strategy::Karney:
+      return "karney";
+    default:
+      return "unknown";
+  }
+}
+
 using Geographic = boost::geometry::cs::geographic<boost::geometry::degree>;
 
 template <typename T>
