@@ -7,10 +7,7 @@
 
 namespace pybg::algorithm {
 
-enum class Strategy { Andoyer, Thomas, Vincenty, Karney };
-
-namespace area {
-namespace geographic {
+namespace {
 
 using Andoyer = boost::geometry::strategy::area::geographic<
     boost::geometry::strategy::andoyer,
@@ -36,8 +33,7 @@ using Karney = boost::geometry::strategy::area::geographic<
         boost::geometry::strategy::karney>::value,
     boost::geometry::srs::spheroid<double>>;
 
-}  // namespace geographic
-}  // namespace area
+}  // namespace
 
 template <typename Geometry>
 auto area(const Geometry& geometry) {
@@ -45,23 +41,22 @@ auto area(const Geometry& geometry) {
 }
 
 template <typename Geometry>
-auto area(const Geometry& geometry, const Strategy strategy,
-          const geographic::Spheroid<double>& spheroid) {
+auto area_with_strategy(const Geometry& geometry,
+                        const geographic::Strategy strategy,
+                        const geographic::Spheroid<double>& spheroid) {
   switch (strategy) {
-    case area::geographic::Strategy::Andoyer:
-      return boost::geometry::area(geometry,
-                                   area::geographic::Andoyer(spheroid));
-    case area::geographic::Strategy::Thomas:
-      return boost::geometry::area(geometry,
-                                   area::geographic::Thomas(spheroid));
-    case area::geographic::Strategy::Vincenty:
-      return boost::geometry::area(geometry,
-                                   area::geographic::Vincenty(spheroid));
-    case area::geographic::Strategy::Karney:
-      return boost::geometry::area(geometry,
-                                   area::geographic::Karney(spheroid));
+    case geographic::Strategy::Andoyer:
+      return boost::geometry::area(geometry, Andoyer(spheroid));
+    case geographic::Strategy::Thomas:
+      return boost::geometry::area(geometry, Thomas(spheroid));
+    case geographic::Strategy::Vincenty:
+      return boost::geometry::area(geometry, Vincenty(spheroid));
+    case geographic::Strategy::Karney:
+      return boost::geometry::area(geometry, Karney(spheroid));
     default:
-      throw std::invalid_argument("Invalid geographic area strategy");
+      throw std::invalid_argument(
+          "Invalid geographic area strategy: " +
+          std::string(geographic::strategy_name(strategy)));
   }
 }
 
