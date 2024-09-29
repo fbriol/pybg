@@ -3,8 +3,6 @@
 #include <nanobind/make_iterator.h>
 #include <nanobind/nanobind.h>
 
-#include "pybg/wkt.hpp"
-
 namespace pybg {
 auto wrap(Py_ssize_t idx, size_t n) -> size_t {
   if (idx < 0) {
