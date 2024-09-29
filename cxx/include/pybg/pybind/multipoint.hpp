@@ -19,8 +19,7 @@ auto bind_multipoint(nanobind::module_ &m, const char *const name) -> void {
 template <template <typename> typename MultiPoint,
           template <typename> typename Point>
 auto instantiate_multipoint(nanobind::module_ &m) -> void {
-  bind_multipoint<double, MultiPoint, Point>(m, "MultiPointFloat64");
-  bind_multipoint<float, MultiPoint, Point>(m, "MultiPointFloat32");
+  bind_multipoint<double, MultiPoint, Point>(m, "MultiPoint");
 }
 
 }  // namespace pybg::pybind

@@ -35,8 +35,7 @@ auto bind_segment(nanobind::module_ &m,
 template <template <typename> typename Segment,
           template <typename> typename Point>
 auto instantiate_segment(nanobind::module_ &m) -> void {
-  bind_segment<Segment<double>, Point<double>>(m, "SegmentFloat64");
-  bind_segment<Segment<float>, Point<float>>(m, "SegmentFloat32");
+  bind_segment<Segment<double>, Point<double>>(m, "Segment");
 }
 
 }  // namespace pybg::pybind

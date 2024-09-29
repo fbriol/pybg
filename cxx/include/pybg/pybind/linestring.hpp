@@ -20,8 +20,7 @@ auto bind_linestring(nanobind::module_ &m, const char *const name) -> void {
 template <template <typename> typename Linestring,
           template <typename> typename Point>
 auto instantiate_linestring(nanobind::module_ &m) -> void {
-  bind_linestring<double, Linestring, Point>(m, "LinestringFloat64");
-  bind_linestring<float, Linestring, Point>(m, "LinestringFloat32");
+  bind_linestring<double, Linestring, Point>(m, "Linestring");
 }
 
 }  // namespace pybg::pybind

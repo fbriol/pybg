@@ -10,8 +10,6 @@ template <template <typename> typename Geometry>
 auto instantiate_wkt(nanobind::module_& m) {
   m.def("to_wkt", &pybg::to_wkt<Geometry<double>>);
   m.def("from_wkt", &pybg::from_wkt<Geometry<double>>);
-  m.def("to_wkt", &pybg::to_wkt<Geometry<float>>);
-  m.def("from_wkt", &pybg::from_wkt<Geometry<float>>);
 }
 
 #define WKT(CS)                            \

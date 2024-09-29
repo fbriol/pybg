@@ -33,8 +33,7 @@ auto bind_point_3d(nanobind::module_ &m, const char *const name) -> void {
 
 template <template <typename> typename Point>
 auto instantiate_point_3d(nanobind::module_ &m) -> void {
-  bind_point_3d<double, Point>(m, "PointFloat64");
-  bind_point_3d<float, Point>(m, "PointFloat32");
+  bind_point_3d<double, Point>(m, "Point");
 }
 
 }  // namespace pybg::pybind

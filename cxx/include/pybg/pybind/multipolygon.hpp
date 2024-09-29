@@ -19,8 +19,7 @@ auto bind_multipolygon(nanobind::module_ &m, const char *const name) -> void {
 template <template <typename> typename MultiPolygon,
           template <typename> typename Polygon>
 auto instantiate_multipolygon(nanobind::module_ &m) -> void {
-  bind_multipolygon<double, MultiPolygon, Polygon>(m, "MultiPolygonFloat64");
-  bind_multipolygon<float, MultiPolygon, Polygon>(m, "MultiPolygonFloat32");
+  bind_multipolygon<double, MultiPolygon, Polygon>(m, "MultiPolygon");
 }
 
 }  // namespace pybg::pybind

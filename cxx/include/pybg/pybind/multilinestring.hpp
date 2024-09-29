@@ -23,9 +23,7 @@ template <template <typename> typename MultiLinestring,
           template <typename> typename Linestring>
 auto instantiate_multilinestring(nanobind::module_ &m) -> void {
   bind_multilinestring<double, MultiLinestring, Linestring>(
-      m, "MultiLinestringFloat64");
-  bind_multilinestring<float, MultiLinestring, Linestring>(
-      m, "MultiLinestringFloat32");
+      m, "MultiLinestring");
 }
 
 }  // namespace pybg::pybind

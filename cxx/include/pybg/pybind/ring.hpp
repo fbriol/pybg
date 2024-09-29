@@ -20,8 +20,7 @@ auto bind_ring(nanobind::module_ &m, const char *const name) -> void {
 
 template <template <typename> typename Ring, template <typename> typename Point>
 auto instantiate_ring(nanobind::module_ &m) -> void {
-  bind_ring<double, Ring, Point>(m, "RingFloat64");
-  bind_ring<float, Ring, Point>(m, "RingFloat32");
+  bind_ring<double, Ring, Point>(m, "Ring");
 }
 
 }  // namespace pybg::pybind

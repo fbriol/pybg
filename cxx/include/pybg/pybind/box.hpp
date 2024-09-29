@@ -36,8 +36,7 @@ auto bind_box(nanobind::module_ &m,
 
 template <template <typename> typename Box, template <typename> typename Point>
 auto instantiate_box(nanobind::module_ &m) -> void {
-  bind_box<Box<double>, Point<double>>(m, "BoxFloat64");
-  bind_box<Box<float>, Point<float>>(m, "BoxFloat32");
+  bind_box<Box<double>, Point<double>>(m, "Box");
 }
 
 }  // namespace pybg::pybind

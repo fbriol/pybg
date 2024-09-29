@@ -37,9 +37,7 @@ auto bind_polygon(nanobind::module_ &m,
 template <template <typename> typename Polygon,
           template <typename> typename Ring, template <typename> typename Point>
 auto instantiate_polygon(nanobind::module_ &m) -> void {
-  bind_polygon<Polygon<double>, Ring<double>, Point<double>>(m,
-                                                             "PolygonFloat64");
-  bind_polygon<Polygon<float>, Ring<float>, Point<float>>(m, "PolygonFloat32");
+  bind_polygon<Polygon<double>, Ring<double>, Point<double>>(m, "Polygon");
 }
 
 }  // namespace pybg::pybind
