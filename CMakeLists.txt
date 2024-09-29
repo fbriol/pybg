@@ -27,3 +27,5 @@ include_directories(${Boost_INCLUDE_DIRS}
 # Create the Python module
 nanobind_add_module(_cartesian cxx/pybind/cartesian.cpp)
 target_link_libraries(_cartesian)
+nanobind_add_module(_geographic cxx/pybind/geographic.cpp)
+target_link_libraries(_geographic)
