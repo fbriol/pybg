@@ -2,8 +2,8 @@
 
 #include <nanobind/nanobind.h>
 
-#include "pybg/cartesian/concepts.hpp"
-#include "pybg/geographic/concepts.hpp"
+#include "pybg/cs/cartesian.hpp"
+#include "pybg/cs/geographic.hpp"
 
 template <template <typename> typename Geometry>
 auto instantiate_area(nanobind::module_& m) {
@@ -20,8 +20,8 @@ auto instantiate_area_with_strategy(nanobind::module_& m) {
   m.def(
       "area_with_strategy",
       [](const Geometry<double>& geometry,
-         const pybg::geographic::Strategy strategy,
-         const pybg::geographic::Spheroid<double>& spheroid) {
+         const pybg::cs::geographic::Strategy strategy,
+         const pybg::cs::geographic::Spheroid<double>& spheroid) {
         return pybg::algorithm::area_with_strategy(geometry, strategy,
                                                    spheroid);
       },
@@ -52,14 +52,16 @@ auto instantiate_area_with_strategy(nanobind::module_& m) {
   instantiate_area_with_strategy<CS::Segment>(m)
 
 NB_MODULE(_area, m) {
+  using namespace pybg::cs;
+
   m.import_("_cartesian");
   m.import_("_geographic");
 
-  AREA(pybg::cartesian::xy);
-  AREA(pybg::geographic);
-  AREA_WITH_STRATEGY(pybg::geographic);
+  AREA(cartesian::xy);
+  AREA(geographic);
+  AREA_WITH_STRATEGY(geographic);
 
-  instantiate_area<pybg::cartesian::xyz::Linestring>(m);
-  instantiate_area<pybg::cartesian::xyz::Point>(m);
-  instantiate_area<pybg::cartesian::xyz::Segment>(m);
+  instantiate_area<cartesian::xyz::Linestring>(m);
+  instantiate_area<cartesian::xyz::Point>(m);
+  instantiate_area<cartesian::xyz::Segment>(m);
 }

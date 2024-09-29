@@ -1,6 +1,6 @@
 #include <nanobind/nanobind.h>
 
-#include "pybg/cartesian/concepts.hpp"
+#include "pybg/cs/cartesian.hpp"
 #include "pybg/pybind/box.hpp"
 #include "pybg/pybind/linestring.hpp"
 #include "pybg/pybind/multilinestring.hpp"
@@ -13,7 +13,7 @@
 #include "pybg/pybind/segment.hpp"
 
 auto instantiate_cartesian_xy(nanobind::module_ &m) -> void {
-  using namespace pybg::cartesian::xy;
+  using namespace pybg::cs::cartesian::xy;
   pybg::pybind::instantiate_box<Box, Point>(m);
   pybg::pybind::instantiate_linestring<Linestring, Point>(m);
   pybg::pybind::instantiate_multilinestring<MultiLinestring, Linestring>(m);
@@ -26,7 +26,7 @@ auto instantiate_cartesian_xy(nanobind::module_ &m) -> void {
 }
 
 auto instantiate_cartesian_xyz(nanobind::module_ &m) -> void {
-  using namespace pybg::cartesian::xyz;
+  using namespace pybg::cs::cartesian::xyz;
   pybg::pybind::instantiate_box<Box, Point>(m);
   pybg::pybind::instantiate_linestring<Linestring, Point>(m);
   pybg::pybind::instantiate_multilinestring<MultiLinestring, Linestring>(m);

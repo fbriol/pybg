@@ -3,7 +3,7 @@
 #include <boost/geometry.hpp>
 #include <boost/geometry/strategy/geographic/area.hpp>
 
-#include "pybg/geographic/concepts.hpp"
+#include "pybg/cs/geographic.hpp"
 
 namespace pybg::algorithm {
 
@@ -42,21 +42,22 @@ auto area(const Geometry& geometry) {
 
 template <typename Geometry>
 auto area_with_strategy(const Geometry& geometry,
-                        const geographic::Strategy strategy,
-                        const geographic::Spheroid<double>& spheroid) {
+                        const cs::geographic::Strategy strategy,
+                        const cs::geographic::Spheroid<double>& spheroid) {
+  using namespace cs::geographic;
   switch (strategy) {
-    case geographic::Strategy::Andoyer:
+    case Strategy::Andoyer:
       return boost::geometry::area(geometry, Andoyer(spheroid));
-    case geographic::Strategy::Thomas:
+    case Strategy::Thomas:
       return boost::geometry::area(geometry, Thomas(spheroid));
-    case geographic::Strategy::Vincenty:
+    case Strategy::Vincenty:
       return boost::geometry::area(geometry, Vincenty(spheroid));
-    case geographic::Strategy::Karney:
+    case Strategy::Karney:
       return boost::geometry::area(geometry, Karney(spheroid));
     default:
       throw std::invalid_argument(
           "Invalid geographic area strategy: " +
-          std::string(geographic::strategy_name(strategy)));
+          std::string(strategy_name(strategy)));
   }
 }
 

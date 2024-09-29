@@ -1,7 +1,5 @@
 #include <nanobind/nanobind.h>
 
-#include "pybg/geographic/concepts.hpp"
-
 namespace pybg::pybind {
 
 template <typename T, template <typename> typename Spheroid>

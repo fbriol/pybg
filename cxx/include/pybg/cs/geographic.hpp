@@ -4,7 +4,7 @@
 
 #include "pybg/concepts.hpp"
 
-namespace pybg::geographic {
+namespace pybg::cs::geographic {
 
 enum class Strategy : int8_t { Andoyer, Thomas, Vincenty, Karney };
 
@@ -55,4 +55,4 @@ using Segment = ModelSegment<T, 2, Geographic>;
 template <typename T>
 using Spheroid = boost::geometry::srs::spheroid<T>;
 
-}  // namespace pybg::geographic
+}  // namespace pybg::cs::geographic

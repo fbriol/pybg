@@ -1,6 +1,6 @@
 #include <nanobind/nanobind.h>
 
-#include "pybg/geographic/concepts.hpp"
+#include "pybg/cs/geographic.hpp"
 #include "pybg/pybind/box.hpp"
 #include "pybg/pybind/linestring.hpp"
 #include "pybg/pybind/multilinestring.hpp"
@@ -13,7 +13,7 @@
 #include "pybg/pybind/spheroid.hpp"
 
 NB_MODULE(_geographic, m) {
-  using namespace pybg::geographic;
+  using namespace pybg::cs::geographic;
 
   nanobind::enum_<Strategy>(m, "Strategy")
       .value("Andoyer", Strategy::Andoyer)

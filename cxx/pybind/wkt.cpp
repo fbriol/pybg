@@ -3,8 +3,8 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/string.h>
 
-#include "pybg/cartesian/concepts.hpp"
-#include "pybg/geographic/concepts.hpp"
+#include "pybg/cs/cartesian.hpp"
+#include "pybg/cs/geographic.hpp"
 
 template <template <typename> typename Geometry>
 auto instantiate_wkt(nanobind::module_& m) {
@@ -26,10 +26,10 @@ NB_MODULE(_wkt, m) {
   m.import_("_cartesian");
   m.import_("_geographic");
 
-  WKT(pybg::cartesian::xy);
-  WKT(pybg::cartesian::xyz);
-  WKT(pybg::geographic);
+  WKT(pybg::cs::cartesian::xy);
+  WKT(pybg::cs::cartesian::xyz);
+  WKT(pybg::cs::geographic);
 
-  instantiate_wkt<pybg::cartesian::xy::Box>(m);
-  instantiate_wkt<pybg::geographic::Box>(m);
+  instantiate_wkt<pybg::cs::cartesian::xy::Box>(m);
+  instantiate_wkt<pybg::cs::geographic::Box>(m);
 }

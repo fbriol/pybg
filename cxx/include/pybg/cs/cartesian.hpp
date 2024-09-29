@@ -3,7 +3,7 @@
 
 #include "pybg/concepts.hpp"
 
-namespace pybg::cartesian {
+namespace pybg::cs::cartesian {
 namespace xy {
 template <typename T>
 using Point = ModelPoint<T, 2, boost::geometry::cs::cartesian>;
@@ -63,4 +63,4 @@ using MultiPolygon = ModelMultiPolygon<T, 3, boost::geometry::cs::cartesian>;
 template <typename T>
 using Segment = ModelSegment<T, 3, boost::geometry::cs::cartesian>;
 }  // namespace xyz
-}  // namespace pybg::cartesian
+}  // namespace pybg::cs::cartesian
