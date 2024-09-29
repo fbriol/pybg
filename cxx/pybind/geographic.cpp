@@ -10,6 +10,7 @@
 #include "pybg/pybind/polygon.hpp"
 #include "pybg/pybind/ring.hpp"
 #include "pybg/pybind/segment.hpp"
+#include "pybg/pybind/spheroid.hpp"
 
 NB_MODULE(_geographic, m) {
   using namespace pybg::geographic;
@@ -22,4 +23,5 @@ NB_MODULE(_geographic, m) {
   pybg::pybind::instantiate_polygon<Polygon, Ring, Point>(m);
   pybg::pybind::instantiate_ring<Ring, Point>(m);
   pybg::pybind::instantiate_segment<Segment, Point>(m);
+  pybg::pybind::instantiate_spheroid<Spheroid>(m);
 }
