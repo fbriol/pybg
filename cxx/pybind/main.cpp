@@ -1,6 +1,7 @@
 #include <nanobind/nanobind.h>
 
-#include "algorithm.hpp"
+#include "algorithm/area.hpp"
+#include "algorithm/azimuth.hpp"
 #include "concepts/cartesian.hpp"
 #include "concepts/ecef.hpp"
 #include "concepts/geographic.hpp"
@@ -21,4 +22,5 @@ NB_MODULE(_core, m) {
   pybg::instantiate_wkt(cartesian, geographic, spherical);
 
   pybg::instantiate_area(cartesian, geographic, spherical);
+  pybg::instantiate_azimuth(cartesian, geographic);
 }
