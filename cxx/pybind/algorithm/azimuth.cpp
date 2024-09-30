@@ -21,7 +21,7 @@ auto bind_azimuth(nanobind::module_& m) {
 auto instantiate_azimuth(nanobind::module_& cartesian,
                          nanobind::module_& geographic) -> void {
 bind_azimuth<cs::cartesian::Point, cs::cartesian::Point>(cartesian);
-bind_azimuth<cs::geographic::Point, cs::geographic::Point>(cartesian);
+bind_azimuth<cs::geographic::Point, cs::geographic::Point>(geographic);
 }
 
 }  // namespace pybg
