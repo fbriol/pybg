@@ -25,13 +25,5 @@ include_directories(${Boost_INCLUDE_DIRS}
                     ${CMAKE_CURRENT_SOURCE_DIR}/cxx/include)
 
 # Create the Python module
-nanobind_add_module(_cartesian cxx/pybind/cartesian.cpp)
-target_link_libraries(_cartesian)
-nanobind_add_module(_spherical cxx/pybind/spherical.cpp)
-target_link_libraries(_spherical)
-nanobind_add_module(_geographic cxx/pybind/geographic.cpp)
-target_link_libraries(_geographic)
-nanobind_add_module(_wkt cxx/pybind/wkt.cpp)
-target_link_libraries(_wkt)
-nanobind_add_module(_area cxx/pybind/area.cpp)
-target_link_libraries(_area)
+file(GLOB_RECURSE PYBIND_SOURCES "cxx/pybind/*.cpp")
+nanobind_add_module(_core ${PYBIND_SOURCES})

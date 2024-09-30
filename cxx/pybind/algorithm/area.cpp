@@ -1,10 +1,13 @@
-#include "pybg/algorithm/area.hpp"
+#include "area.hpp"
 
 #include <nanobind/nanobind.h>
 
+#include "pybg/algorithm/area.hpp"
 #include "pybg/cs/cartesian.hpp"
 #include "pybg/cs/geographic.hpp"
 #include "pybg/cs/spherical.hpp"
+
+namespace pybg {
 
 template <template <typename> typename Geometry>
 auto instantiate_area(nanobind::module_& m) {
@@ -30,7 +33,7 @@ auto instantiate_area_with_strategy(nanobind::module_& m) {
       nanobind::arg("spheroid"));
 }
 
-#define AREA(CS)                            \
+#define AREA(CS, m)                         \
   instantiate_area<CS::Box>(m);             \
   instantiate_area<CS::Linestring>(m);      \
   instantiate_area<CS::MultiLinestring>(m); \
@@ -41,7 +44,7 @@ auto instantiate_area_with_strategy(nanobind::module_& m) {
   instantiate_area<CS::Ring>(m);            \
   instantiate_area<CS::Segment>(m)
 
-#define AREA_WITH_STRATEGY(CS)                            \
+#define AREA_WITH_STRATEGY(CS, m)                         \
   instantiate_area_with_strategy<CS::Box>(m);             \
   instantiate_area_with_strategy<CS::Linestring>(m);      \
   instantiate_area_with_strategy<CS::MultiLinestring>(m); \
@@ -52,18 +55,14 @@ auto instantiate_area_with_strategy(nanobind::module_& m) {
   instantiate_area_with_strategy<CS::Ring>(m);            \
   instantiate_area_with_strategy<CS::Segment>(m)
 
-NB_MODULE(_area, m) {
-  using namespace pybg::cs;
+auto instantiate_area(nanobind::module_& cartesian,
+                      nanobind::module_& geographic,
+                      nanobind::module_& spherical) -> void {
+  AREA(cs::cartesian, cartesian);
+  AREA(cs::geographic, geographic);
+  AREA(cs::spherical, spherical);
 
-  m.import_("_cartesian");
-  m.import_("_geographic");
-
-  AREA(cartesian::xy);
-  AREA(geographic);
-  AREA(spherical);
-  AREA_WITH_STRATEGY(geographic);
-
-  instantiate_area<cartesian::xyz::Linestring>(m);
-  instantiate_area<cartesian::xyz::Point>(m);
-  instantiate_area<cartesian::xyz::Segment>(m);
+  AREA_WITH_STRATEGY(cs::geographic, geographic);
 }
+
+}  // namespace pybg

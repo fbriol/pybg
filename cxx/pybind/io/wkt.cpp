@@ -1,4 +1,4 @@
-#include "pybg/io/wkt.hpp"
+#include "wkt.hpp"
 
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/string.h>
@@ -6,6 +6,9 @@
 #include "pybg/cs/cartesian.hpp"
 #include "pybg/cs/geographic.hpp"
 #include "pybg/cs/spherical.hpp"
+#include "pybg/io/wkt.hpp"
+
+namespace pybg {
 
 template <template <typename> typename Geometry>
 auto instantiate_wkt(nanobind::module_& m) {
@@ -13,7 +16,8 @@ auto instantiate_wkt(nanobind::module_& m) {
   m.def("from_wkt", &pybg::from_wkt<Geometry<double>>);
 }
 
-#define WKT(CS)                            \
+#define WKT(CS, m)                         \
+  instantiate_wkt<CS::Box>(m);             \
   instantiate_wkt<CS::Linestring>(m);      \
   instantiate_wkt<CS::MultiLinestring>(m); \
   instantiate_wkt<CS::MultiPoint>(m);      \
@@ -23,15 +27,12 @@ auto instantiate_wkt(nanobind::module_& m) {
   instantiate_wkt<CS::Ring>(m);            \
   instantiate_wkt<CS::Segment>(m)
 
-NB_MODULE(_wkt, m) {
-  m.import_("_cartesian");
-  m.import_("_geographic");
-
-  WKT(pybg::cs::cartesian::xy);
-  WKT(pybg::cs::cartesian::xyz);
-  WKT(pybg::cs::geographic);
-  WKT(pybg::cs::spherical);
-
-  instantiate_wkt<pybg::cs::cartesian::xy::Box>(m);
-  instantiate_wkt<pybg::cs::geographic::Box>(m);
+auto instantiate_wkt(nanobind::module_& cartesian,
+                     nanobind::module_& geographic,
+                     nanobind::module_& spherical) -> void {
+  WKT(cs::cartesian, cartesian);
+  WKT(cs::geographic, geographic);
+  WKT(cs::spherical, spherical);
 }
+
+}  // namespace pybg
