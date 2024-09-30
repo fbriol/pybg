@@ -1,6 +1,6 @@
 #include <nanobind/nanobind.h>
 
-#include "algorithm/area.hpp"
+#include "algorithm.hpp"
 #include "concepts/cartesian.hpp"
 #include "concepts/ecef.hpp"
 #include "concepts/geographic.hpp"
