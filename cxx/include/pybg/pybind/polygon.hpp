@@ -6,8 +6,8 @@
 namespace pybg::pybind {
 
 template <typename Polygon, typename Ring, typename Point>
-auto bind_polygon(nanobind::module_ &m,
-                  const char *const name) -> nanobind::class_<Polygon> {
+auto bind_polygon(nanobind::module_ &m, const char *const name)
+    -> nanobind::class_<Polygon> {
   return nanobind::class_<Polygon>(m, name)
       .def(
           "__init__",
@@ -27,6 +27,16 @@ auto bind_polygon(nanobind::module_ &m,
           },
           nanobind::arg("points") = std::nullopt,
           nanobind::arg("inners") = std::nullopt)
+      .def_prop_rw(
+          "outer", [](const Polygon &self) { return self.outer(); },
+          [](Polygon &self, const Ring &outer) { self.outer() = outer; },
+          "The outer ring of the polygon.")
+      .def_prop_rw(
+          "inners", [](const Polygon &self) { return self.inners(); },
+          [](Polygon &self, const std::vector<Ring> &inners) {
+            self.inners() = inners;
+          },
+          "The inner rings of the polygon.")
       .def("__repr__", [](const Polygon &self) {
         return "<Polygon with " + std::to_string(self.outer().size()) +
                " outer points and " + std::to_string(self.inners().size()) +

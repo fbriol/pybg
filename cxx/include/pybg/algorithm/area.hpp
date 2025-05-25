@@ -41,9 +41,8 @@ auto area(const Geometry& geometry) {
 }
 
 template <typename Geometry>
-auto area_with_strategy(const Geometry& geometry,
-                        const cs::geographic::Strategy strategy,
-                        const cs::geographic::Spheroid<double>& spheroid) {
+auto area(const Geometry& geometry, const cs::geographic::Strategy strategy,
+          const cs::geographic::Spheroid<double>& spheroid) {
   using namespace cs::geographic;
   switch (strategy) {
     case Strategy::Andoyer:
@@ -55,9 +54,8 @@ auto area_with_strategy(const Geometry& geometry,
     case Strategy::Karney:
       return boost::geometry::area(geometry, Karney(spheroid));
     default:
-      throw std::invalid_argument(
-          "Invalid geographic area strategy: " +
-          std::string(strategy_name(strategy)));
+      throw std::invalid_argument("Invalid geographic area strategy: " +
+                                  std::string(strategy_name(strategy)));
   }
 }
 
